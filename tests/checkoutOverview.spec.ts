@@ -3,7 +3,7 @@ import { BASE_URL, username, password } from '../utils/envConfig';
 import { ProductPage } from '../pages/ProductPage';
 import { LoginPage } from '../pages/LoginPage';
 import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/checkoutPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
 import {CheckoutOverviewPage} from '../pages/CheckoutOverviewPage'
 import {userDataCheckout} from '../testData/userDetails'
 import { productsToBeAdded } from '../testData/products';
