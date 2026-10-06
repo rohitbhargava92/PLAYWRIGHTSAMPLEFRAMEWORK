@@ -26,5 +26,12 @@ jobs:
       - name: Install Playwright browsers
         run: node node_modules/playwright/cli.js install --with-deps
 
-      - name: Run Playwright tests
-        run: node node_modules/playwright/cli.js test tests/E2E
+      - name: Run E2E Playwright tests
+        run: node node_modules/playwright/cli.js test tests/E2E --project=chromium
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+            name: playwright-report
+            path: playwright-report/
