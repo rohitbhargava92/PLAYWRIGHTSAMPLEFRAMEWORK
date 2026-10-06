@@ -3,7 +3,7 @@ import { BASE_URL, username, password } from '../utils/envConfig';
 import { ProductPage } from '../pages/ProductPage';
 import { LoginPage } from '../pages/LoginPage';
 import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/checkoutPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
 import {userDataCheckout} from '../testData/userDetails'
 
 test.describe("Checkout Page Validation", () => {

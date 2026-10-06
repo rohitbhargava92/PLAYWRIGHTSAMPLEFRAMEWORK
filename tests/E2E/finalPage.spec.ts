@@ -1,15 +1,15 @@
 import { test, expect } from '@playwright/test';
-import { BASE_URL, username, password } from '../utils/envConfig';
-import { ProductPage } from '../pages/ProductPage';
-import { LoginPage } from '../pages/LoginPage';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
-import {CheckoutOverviewPage} from '../pages/CheckoutOverviewPage'
-import {userDataCheckout} from '../testData/userDetails'
-import { productsToBeAdded } from '../testData/products';
-import { FinalPage } from '../pages/FinalPage';
+import { BASE_URL, username, password } from '../../utils/envConfig';
+import { ProductPage } from '../../pages/ProductPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { CartPage } from '../../pages/CartPage';
+import { CheckoutPage } from '../../pages/CheckoutPage';
+import {CheckoutOverviewPage} from '../../pages/CheckoutOverviewPage'
+import {userDataCheckout} from '../../testData/userDetails'
+import { productsToBeAdded } from '../../testData/products';
+import { FinalPage } from '../../pages/FinalPage';
 
-test.describe("Checkout Overview Page Validation", () => {
+test.describe("E2E Test Validation", () => {
     let loginPage: LoginPage;
     let productPage: ProductPage;
     let cartPage: CartPage;
@@ -36,25 +36,12 @@ test.describe("Checkout Overview Page Validation", () => {
         await checkoutOverviewPage.clickFinish();
     })
 
-     test("Validate Final Page Elements on UI and URL",async({page})=>
-    {
-        await expect(page).toHaveURL("https://www.saucedemo.com/checkout-complete.html");
-        const elements= await finalPage.getFinalPageElements();
-        await expect(elements.pageInfo).toBeVisible();
-        await expect(elements.backHomeButton).toBeVisible();
-        await expect(elements.successMsg).toBeVisible();
-    })
 
-     test("Validate Success Message",async({page})=>
+
+     test("Validate Order Sucessfull",async({page})=>
     {
         const message= await finalPage.getSuccessMessageText();
         expect(message).toBe("Thank you for your order!");
-    })
-
-     test("Validate Back Home Button",async({page})=>
-    {
-        await finalPage.clickBackHomeButton();
-        expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
     })
 
 
