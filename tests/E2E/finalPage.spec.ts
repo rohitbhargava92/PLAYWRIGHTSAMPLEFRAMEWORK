@@ -4,8 +4,8 @@ import { ProductPage } from '../../pages/ProductPage';
 import { LoginPage } from '../../pages/LoginPage';
 import { CartPage } from '../../pages/CartPage';
 import { CheckoutPage } from '../../pages/CheckoutPage';
-import {CheckoutOverviewPage} from '../../pages/CheckoutOverviewPage'
-import {userDataCheckout} from '../../testData/userDetails'
+import { CheckoutOverviewPage } from '../../pages/CheckoutOverviewPage'
+import { userDataCheckout } from '../../testData/userDetails'
 import { productsToBeAdded } from '../../testData/products';
 import { FinalPage } from '../../pages/FinalPage';
 
@@ -17,13 +17,13 @@ test.describe("E2E Test Validation", () => {
     let checkoutOverviewPage: CheckoutOverviewPage;
     let finalPage: FinalPage;
 
-    test.beforeEach(async ({page}) => {
+    test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         productPage = new ProductPage(page);
         cartPage = new CartPage(page);
         checkoutPage = new CheckoutPage(page);
-        checkoutOverviewPage= new CheckoutOverviewPage(page);
-        finalPage= new FinalPage(page);
+        checkoutOverviewPage = new CheckoutOverviewPage(page);
+        finalPage = new FinalPage(page);
         await page.goto(BASE_URL);
         await loginPage.loginToApplication(username, password);
         await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
@@ -31,19 +31,21 @@ test.describe("E2E Test Validation", () => {
         await productPage.clickOnCartLink();
         await expect(page).toHaveURL("https://www.saucedemo.com/cart.html");
         await cartPage.clickCheckoutButton();
-        await checkoutPage.fillCheckoutDetails(userDataCheckout.firstName,userDataCheckout.lastName,userDataCheckout.postalCode);
+        await checkoutPage.fillCheckoutDetails(userDataCheckout.firstName, userDataCheckout.lastName, userDataCheckout.postalCode);
         await checkoutPage.clickContinueButton();
         await checkoutOverviewPage.clickFinish();
     })
 
-
-
-     test("Validate Order Sucessfull",async({page})=>
-    {
-        const message= await finalPage.getSuccessMessageText();
+    test("Validate Order Sucessfull",{tag: ["@e2e"]}, async ({ page }) => {
+        const message = await finalPage.getSuccessMessageText();
         expect(message).toBe("Thank you for your order!");
     })
 
-
-
-})
+    test.afterEach(async ({ page }, testInfo) => {
+        if (testInfo.status !== testInfo.expectedStatus) {
+            //Taking Screenshot in PlayWright
+            await page.screenshot({ path: `screenshots/${testInfo.title}.png` });
+        }
+    });
+}
+)

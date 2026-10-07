@@ -56,6 +56,7 @@ export class ProductPage{
         }
     }
 
+    //Use Select Option for Dropdowns
     async filterProductsByAtoZ(){
         await this.page.selectOption(productPageLocators.filterDropdown,"az")
     }
