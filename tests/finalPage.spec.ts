@@ -45,7 +45,7 @@ test.describe("Checkout Overview Page Validation", () => {
         await expect(elements.successMsg).toBeVisible();
     })
 
-     test("Validate Success Message",async({page})=>
+     test("Validate Success Message @smoke",async({page})=>
     {
         const message= await finalPage.getSuccessMessageText();
         expect(message).toBe("Thank you for your order!");
